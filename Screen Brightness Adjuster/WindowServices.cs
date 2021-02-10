@@ -76,12 +76,6 @@ namespace Screen_Brightness_Adjuster
             _brightnessInstance.InvokeMethod("WmiSetBrightness", inParams, null);
         }
 
-        private void roundButton1_Click(object sender, EventArgs e)
-        {
-            a = Algorithm1(Convert.ToInt32(richTextBox1.Text));
-            SetDeviceBrightness(a);
-        }
-
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -90,6 +84,19 @@ namespace Screen_Brightness_Adjuster
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                a = Algorithm1(Convert.ToInt32(richTextBox1.Text));
+                SetDeviceBrightness(a);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
         }
     }
 }
