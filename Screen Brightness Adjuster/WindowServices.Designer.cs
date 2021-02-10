@@ -31,6 +31,7 @@ namespace Screen_Brightness_Adjuster
         {
             this.roundButton1 = new Screen_Brightness_Adjuster.RoundButton();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // roundButton1
@@ -53,11 +54,21 @@ namespace Screen_Brightness_Adjuster
             this.comboBox1.TabIndex = 3;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(223, 13);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(100, 22);
+            this.richTextBox1.TabIndex = 4;
+            this.richTextBox1.Text = "";
+            this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
+            // 
             // WindowsServices
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(523, 388);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.roundButton1);
             this.Name = "WindowsServices";
@@ -69,6 +80,7 @@ namespace Screen_Brightness_Adjuster
         #endregion
         private RoundButton roundButton1;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

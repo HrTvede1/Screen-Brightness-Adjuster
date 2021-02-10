@@ -78,11 +78,16 @@ namespace Screen_Brightness_Adjuster
 
         private void roundButton1_Click(object sender, EventArgs e)
         {
-            a = Algorithm1(espInput);
+            a = Algorithm1(Convert.ToInt32(richTextBox1.Text));
             SetDeviceBrightness(a);
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
 
         }
