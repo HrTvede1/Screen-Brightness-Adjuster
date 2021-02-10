@@ -18,6 +18,13 @@ namespace Screen_Brightness_Adjuster
         private static ManagementBaseObject _brightnessClass;
         private static int a;
 
+        public static int espInput;
+
+        public int Algorithm1(int i)
+        {
+            return a = 100 - (i / 4000) * 100;
+        }
+
         public WindowsServices()
         {
             InitializeComponent();
@@ -68,13 +75,16 @@ namespace Screen_Brightness_Adjuster
             inParams["Timeout"] = 0;
             _brightnessInstance.InvokeMethod("WmiSetBrightness", inParams, null);
         }
-        private void trackBar1_Scroll(object sender, EventArgs e)
+
+        private void roundButton1_Click(object sender, EventArgs e)
         {
-        }
-        private void button1_Click(object sender, EventArgs e)
-        {
-            a = trackBar1.Value;
+            a = Algorithm1(espInput);
             SetDeviceBrightness(a);
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
