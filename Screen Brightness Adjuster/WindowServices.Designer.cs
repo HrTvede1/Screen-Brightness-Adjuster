@@ -33,7 +33,6 @@ namespace Screen_Brightness_Adjuster
             this.button1 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
-            this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
@@ -79,16 +78,6 @@ namespace Screen_Brightness_Adjuster
             this.trackBar1.Size = new System.Drawing.Size(350, 45);
             this.trackBar1.TabIndex = 7;
             this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(23, 140);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(90, 51);
-            this.button2.TabIndex = 8;
-            this.button2.Text = "Current Brightness";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
@@ -165,7 +154,6 @@ namespace Screen_Brightness_Adjuster
             this.Controls.Add(this.button1);
             this.Controls.Add(this.trackBar1);
             this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.richTextBox1);
             this.Name = "WindowsServices";
             this.Text = "Screen Brightness Adjuster";
@@ -177,7 +165,6 @@ namespace Screen_Brightness_Adjuster
 
         #endregion
         private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TrackBar trackBar1;
         private System.Windows.Forms.Button button1;

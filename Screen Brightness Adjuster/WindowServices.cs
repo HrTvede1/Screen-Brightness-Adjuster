@@ -7,8 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Net;
 using System.Runtime.InteropServices;
 using System.Management;
+using System.Diagnostics;
 
 namespace Screen_Brightness_Adjuster
 {
@@ -28,6 +30,19 @@ namespace Screen_Brightness_Adjuster
             trackBar1.Visible = false;
             richTextBox1.Visible = false;
             label1.Visible = false;
+        }
+
+        public void RestrictA()
+        {
+            if (a < 0)
+            {
+                a = 0;
+            }
+
+            if (a > 100)
+            {
+                a = 100;
+            }
         }
 
         public int Algorithm1(int i)
@@ -101,10 +116,18 @@ namespace Screen_Brightness_Adjuster
 
         private void button1_Click(object sender, EventArgs e)
         {
+            ///
+            /// Take integer from ESP32 and change brightness relative to it
+            /// 1. Run ESP32 integer through algorithm
+            /// 2. Change the brightness to the outputed number
+            /// 3. Show then current brightness as en integer
+            ///
             try
             {
                 a = Algorithm1(espInput);
                 SetDeviceBrightness(a);
+                RestrictA();
+                textBox1.Text = Convert.ToString(a);
             }
             catch (Exception ex)
             {
@@ -115,12 +138,6 @@ namespace Screen_Brightness_Adjuster
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            textBox1.Text = string.Empty;
-            start = false;
         }
 
         private void trackBar1_Scroll(object sender, EventArgs e)
@@ -222,16 +239,26 @@ namespace Screen_Brightness_Adjuster
             ///
             /// Display options screen
             /// Options screen includes:
-            /// ...
+            /// 1. Rick rolls
             ///
+
+            Process.Start("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
+            ///
+            /// Change brightness to the trackbar value
+            /// 1. Get value form trackbar
+            /// 2. Change brightness to the trackbar value
+            /// 3. Show the current brightness
+            ///
             try
             {
                 a = trackBar1.Value;
                 SetDeviceBrightness(a);
+                RestrictA();
+                textBox1.Text = Convert.ToString(a);
             }
             catch (Exception ex)
             {
@@ -241,10 +268,18 @@ namespace Screen_Brightness_Adjuster
 
         private void button7_Click(object sender, EventArgs e)
         {
+            ///
+            /// Change brightness to value stated in the textbox
+            /// 1. Get value from text and convert it to an integer
+            /// 2. Change brightness to the outputed integer
+            /// 3. Show the current bruightness
+            ///
             try
             {
                 a = Convert.ToInt32(richTextBox1.Text);
                 SetDeviceBrightness(a);
+                RestrictA();
+                textBox1.Text = Convert.ToString(a);
             }
             catch (Exception ex)
             {
