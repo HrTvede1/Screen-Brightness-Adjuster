@@ -47,7 +47,7 @@ namespace Screen_Brightness_Adjuster
 
         public int Algorithm1(int i)
         {
-            return a = 100 - (i / 4000) * 100;
+            return a = 100 - (i / 4095) * 100;
         }
 
         public void showTextbox1()
