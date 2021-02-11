@@ -67,25 +67,25 @@ namespace Screen_Brightness_Adjuster
             }
         }
 
-        //static WindowsServices()
-        //{
-        //    // Querying the Windows service to get the Brightness API.
-        //    var searcher = new ManagementObjectSearcher(
-        //        "root\\WMI",
-        //        "SELECT * FROM WmiMonitorBrightness");
-        //
-        //var results = searcher.Get();
-        //var resultEnum = results.GetEnumerator();
-        //resultEnum.MoveNext();
-        //_brightnessClass = resultEnum.Current;
+        static WindowsServices()
+        {
+            // Querying the Windows service to get the Brightness API.
+            var searcher = new ManagementObjectSearcher(
+                "root\\WMI",
+                "SELECT * FROM WmiMonitorBrightness");
+        
+        var results = searcher.Get();
+        var resultEnum = results.GetEnumerator();
+        resultEnum.MoveNext();
+        _brightnessClass = resultEnum.Current;
 
         // We need to create an instance to use the Set method!
-        //var instanceName = (string)_brightnessClass["InstanceName"];
-        //_brightnessInstance = new ManagementObject(
-        //        "root\\WMI",
-        //        "WmiMonitorBrightnessMethods.InstanceName='" + instanceName + "'",
-        //        null);
-        //}
+        var instanceName = (string)_brightnessClass["InstanceName"];
+        _brightnessInstance = new ManagementObject(
+                "root\\WMI",
+                "WmiMonitorBrightnessMethods.InstanceName='" + instanceName + "'",
+                null);
+        }
 
         public int GetDeviceCurrentBrightness()
         {
