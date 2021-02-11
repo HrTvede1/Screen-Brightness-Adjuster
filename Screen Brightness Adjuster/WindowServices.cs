@@ -11,6 +11,8 @@ using System.Net;
 using System.Runtime.InteropServices;
 using System.Management;
 using System.Diagnostics;
+using System.IO.Ports;
+using System.IO;
 
 namespace Screen_Brightness_Adjuster
 {
@@ -30,6 +32,13 @@ namespace Screen_Brightness_Adjuster
             trackBar1.Visible = false;
             richTextBox1.Visible = false;
             label1.Visible = false;
+        }
+
+        private void WindowsServices_Load(object sender, EventArgs e)
+        {
+            string[] portLists = SerialPort.GetPortNames();
+            comboBox_comport.Items.AddRange(portLists);
+
         }
 
         public void RestrictA()
@@ -64,15 +73,15 @@ namespace Screen_Brightness_Adjuster
             var searcher = new ManagementObjectSearcher(
                 "root\\WMI",
                 "SELECT * FROM WmiMonitorBrightness");
+        
+        var results = searcher.Get();
+        var resultEnum = results.GetEnumerator();
+        resultEnum.MoveNext();
+        _brightnessClass = resultEnum.Current;
 
-            var results = searcher.Get();
-            var resultEnum = results.GetEnumerator();
-            resultEnum.MoveNext();
-            _brightnessClass = resultEnum.Current;
-
-            // We need to create an instance to use the Set method!
-            var instanceName = (string)_brightnessClass["InstanceName"];
-            _brightnessInstance = new ManagementObject(
+        // We need to create an instance to use the Set method!
+        var instanceName = (string)_brightnessClass["InstanceName"];
+        _brightnessInstance = new ManagementObject(
                 "root\\WMI",
                 "WmiMonitorBrightnessMethods.InstanceName='" + instanceName + "'",
                 null);
@@ -286,5 +295,45 @@ namespace Screen_Brightness_Adjuster
                 MessageBox.Show("Error:" + ex.Message);
             }
         }
+
+        private void button_Con_Dis_Click(object sender, EventArgs e)
+        {
+            
+            if (button_Con_Dis.BackColor == Color.Lime) 
+            {
+                button_Con_Dis.BackColor = Color.Red;
+                button_Con_Dis.Text = "Disconnect";
+                try
+                {
+                    serialPort1.PortName = comboBox_comport.Text;
+                    serialPort1.BaudRate = 9600;
+                    serialPort1.Open();
+
+                    progressBar_constate.Value = 100;
+                }
+                catch (Exception error)
+                {
+                    MessageBox.Show(error.Message);
+                }
+            } else
+            {
+                button_Con_Dis.BackColor = Color.Lime;
+                button_Con_Dis.Text = "Connect";
+                serialPort1.Close();
+                progressBar_constate.Value = 0;
+            }
+        }
+
+        string serialDatain; 
+        private void serialPort1_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            serialDatain = serialPort1.ReadLine();
+            if (serialDatain.Contains("VMDPE") == false)
+            {
+                //OutPut here
+            }
+        }
+
+
     }
 }

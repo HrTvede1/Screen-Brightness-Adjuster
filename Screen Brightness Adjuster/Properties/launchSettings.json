@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Screen Brightness Adjuster": {
+      "commandName": "Project",
+      "remoteDebugEnabled": false
+    }
+  }
+}
